@@ -1,67 +1,28 @@
 <!doctype html>
-
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Connect Four</title>
   <link rel="stylesheet" href="style.css">
-  <script src="app.js" charset="utf-8"></script>
+  <script src="app.js" charset="utf-8" defer></script>
 </head>
 <body>
   <h3>The current Player is: Player <span id="current-player">1</span></h3>
   <h3 id="result"></h3>
-
   <div class="grid">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div class="taken"></div>
-    <div class="taken"></div>
-    <div class="taken"></div>
-    <div class="taken"></div>
-    <div class="taken"></div>
-    <div class="taken"></div>
-    <div class="taken"></div>
+    <!-- 42 grid cells for Connect Four board -->
+    <!-- Create 42 divs for the grid cells -->
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
   </div>
+
+  <h3>Score:</h3>
+  <p>Player One: <span id="player-one-score">0</span></p>
+  <p>Player Two: <span id="player-two-score">0</span></p>
 
 </body>
 </html>
