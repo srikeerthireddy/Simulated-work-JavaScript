@@ -1,4 +1,3 @@
-
 const grid = document.querySelector('.grid')
 const scoreDisplay = document.querySelector('#score')
 const blockWidth = 100
@@ -18,7 +17,7 @@ let ballCurrentPosition = ballStart
 let timerId
 let score = 0
 
-//my block
+// my block
 class Block {
   constructor(xAxis, yAxis) {
     this.bottomLeft = [xAxis, yAxis]
@@ -28,7 +27,7 @@ class Block {
   }
 }
 
-//all my blocks
+// all my blocks
 const blocks = [
   new Block(10, 270),
   new Block(120, 270),
@@ -47,136 +46,161 @@ const blocks = [
   new Block(450, 210),
 ]
 
-//draw my blocks
+// draw my blocks
 function addBlocks() {
   for (let i = 0; i < blocks.length; i++) {
     const block = document.createElement('div')
     block.classList.add('block')
-    block.style.left = blocks[i].bottomLeft[0] + 'px'  
-    block.style.bottom = blocks[i].bottomLeft[1] + 'px'  
+    block.style.left = blocks[i].bottomLeft[0] + 'px'
+    block.style.bottom = blocks[i].bottomLeft[1] + 'px'
     grid.appendChild(block)
-    console.log(blocks[i].bottomLeft)
   }
 }
 addBlocks()
 
-//add user
+// add user
 const user = document.createElement('div')
 user.classList.add('user')
 grid.appendChild(user)
 drawUser()
 
-//add ball
+// add ball
 const ball = document.createElement('div')
 ball.classList.add('ball')
 grid.appendChild(ball)
 drawBall()
 
-//move user
+// move user
 function moveUser(e) {
   switch (e.key) {
     case 'ArrowLeft':
       if (currentPosition[0] > 0) {
         currentPosition[0] -= 10
-        console.log(currentPosition[0] > 0)
-        drawUser()   
+        drawUser()
       }
       break
     case 'ArrowRight':
       if (currentPosition[0] < (boardWidth - blockWidth)) {
         currentPosition[0] += 10
-        console.log(currentPosition[0])
-        drawUser()   
+        drawUser()
       }
       break
   }
 }
 document.addEventListener('keydown', moveUser)
 
-//draw User
+// draw User
 function drawUser() {
   user.style.left = currentPosition[0] + 'px'
   user.style.bottom = currentPosition[1] + 'px'
 }
 
-//draw Ball
+// draw Ball
 function drawBall() {
   ball.style.left = ballCurrentPosition[0] + 'px'
   ball.style.bottom = ballCurrentPosition[1] + 'px'
 }
 
-//move ball
+// move ball
 function moveBall() {
-    ballCurrentPosition[0] += xDirection
-    ballCurrentPosition[1] += yDirection
-    drawBall()
-    checkForCollisions()
+  ballCurrentPosition[0] += xDirection
+  ballCurrentPosition[1] += yDirection
+  drawBall()
+  checkForCollisions()
 }
 timerId = setInterval(moveBall, 30)
 
-//check for collisions
+// check for collisions
 function checkForCollisions() {
-  //check for block collision
-  for (let i = 0; i < blocks.length; i++){
-    if
-    (
-      (ballCurrentPosition[0] > blocks[i].bottomLeft[0] && ballCurrentPosition[0] < blocks[i].bottomRight[0]) &&
-      ((ballCurrentPosition[1] + ballDiameter) > blocks[i].bottomLeft[1] && ballCurrentPosition[1] < blocks[i].topLeft[1]) 
-    )
-      {
-      const allBlocks = Array.from(document.querySelectorAll('.block'))
-      allBlocks[i].classList.remove('block')
-      blocks.splice(i,1)
-      changeDirection()   
+  // Check for block collision
+  for (let i = 0; i < blocks.length; i++) {
+    const block = blocks[i]
+    if (
+      ballCurrentPosition[0] + ballDiameter > block.bottomLeft[0] &&
+      ballCurrentPosition[0] < block.bottomRight[0] &&
+      ballCurrentPosition[1] + ballDiameter > block.bottomLeft[1] &&
+      ballCurrentPosition[1] < block.topLeft[1]
+    ) {
+      // Remove block from grid
+      blocks.splice(i, 1)
       score++
       scoreDisplay.innerHTML = score
-      if (blocks.length == 0) {
+
+      // Remove the block element from DOM
+      document.querySelectorAll('.block')[i].remove()
+
+      // Play block hit sound
+      blockHit()
+
+      // Change direction of the ball
+      changeDirection()
+
+      // Check if all blocks are destroyed
+      if (blocks.length === 0) {
         scoreDisplay.innerHTML = 'You Win!'
         clearInterval(timerId)
         document.removeEventListener('keydown', moveUser)
       }
+      break
     }
   }
-  // check for wall hits
-  if (ballCurrentPosition[0] >= (boardWidth - ballDiameter) || ballCurrentPosition[0] <= 0 || ballCurrentPosition[1] >= (boardHeight - ballDiameter))
-  {
-    changeDirection()
+
+  // Check for wall hits
+  if (ballCurrentPosition[0] >= (boardWidth - ballDiameter) || ballCurrentPosition[0] <= 0) {
+    xDirection = -xDirection
   }
 
-  //check for user collision
-  if
-  (
-    (ballCurrentPosition[0] > currentPosition[0] && ballCurrentPosition[0] < currentPosition[0] + blockWidth) &&
-    (ballCurrentPosition[1] > currentPosition[1] && ballCurrentPosition[1] < currentPosition[1] + blockHeight ) 
-  )
-  {
-    changeDirection()
+  if (ballCurrentPosition[1] >= (boardHeight - ballDiameter)) {
+    yDirection = -yDirection
   }
 
-  //game over
+  // Check for user collision
+  if (
+    ballCurrentPosition[0] + ballDiameter > currentPosition[0] &&
+    ballCurrentPosition[0] < currentPosition[0] + blockWidth &&
+    ballCurrentPosition[1] + ballDiameter > currentPosition[1] &&
+    ballCurrentPosition[1] < currentPosition[1] + blockHeight
+  ) {
+    yDirection = -yDirection
+  }
+
+  // Game over
   if (ballCurrentPosition[1] <= 0) {
     clearInterval(timerId)
     scoreDisplay.innerHTML = 'You lose!'
+    gameOver()
     document.removeEventListener('keydown', moveUser)
   }
 }
 
-
+// Change direction of ball after collision
 function changeDirection() {
   if (xDirection === 2 && yDirection === 2) {
     yDirection = -2
-    return
-  }
-  if (xDirection === 2 && yDirection === -2) {
+  } else if (xDirection === 2 && yDirection === -2) {
     xDirection = -2
-    return
-  }
-  if (xDirection === -2 && yDirection === -2) {
+  } else if (xDirection === -2 && yDirection === -2) {
     yDirection = 2
-    return
-  }
-  if (xDirection === -2 && yDirection === 2) {
+  } else if (xDirection === -2 && yDirection === 2) {
     xDirection = 2
-    return
   }
+}
+
+// Function to play sound
+function playSound(soundFile) {
+  const audio = new Audio(soundFile)
+  audio.volume = 0.5 // Adjust the volume if needed
+  audio.play().catch((err) => {
+    console.error('Audio play failed:', err)
+  })
+}
+
+// Play block hit sound
+function blockHit() {
+  playSound('sounds/ballhit.mp3')
+}
+
+// Play game over sound
+function gameOver() {
+  playSound('sounds/gameover.mp3')
 }
