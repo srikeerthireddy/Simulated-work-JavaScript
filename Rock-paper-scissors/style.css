@@ -1,0 +1,116 @@
+/* Basic Styling for the Body */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Centering the Game Container with more width */
+.container {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 400px; /* Increased width */
+}
+
+/* Styling for the Header */
+h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* Styling for the Scores */
+.scores h3 {
+    font-size: 1.2rem;
+    color: #34495e;
+}
+
+#score {
+    font-size: 1.5rem;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Styling for Choices Buttons */
+.choices button {
+    background-color: #3498db;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.choices button:hover {
+    background-color: #2980b9;
+}
+
+/* Styling for Player and Computer's Choice Display */
+#player-choice, #computer-choice {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* Added spacing between player and computer choices */
+}
+
+#player-choice h3, #computer-choice h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #34495e;
+}
+
+#player-choice span, #computer-choice span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2ecc71; /* Green for player */
+}
+
+/* Styling for the Result */
+.result h2 {
+    font-size: 1.5rem;
+    color: #2ecc71;
+}
+
+.result span {
+    font-size: 1.2rem;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Reset Button Styling */
+#reset {
+    background-color: #f39c12;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#reset:hover {
+    background-color: #e67e22;
+}
+
+/* Add Animation to Choices */
+.clicked {
+    animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}

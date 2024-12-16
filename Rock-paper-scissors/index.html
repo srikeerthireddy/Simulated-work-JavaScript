@@ -3,19 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock-Paper-Scissors</title>
+    <title>Rock Paper Scissors Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Computer Choice: <span id="computer-choice"></span></h2>
-    <h2>Your Choice: <span id="user-choice"></span></h2>
-    <h2>Result: <span id="result"></span></h2>
-    <h2>Scores: <span id="scores">Player: 0 | Computer: 0</span></h2>
+    <div class="container">
+        <h1>Rock Paper Scissors</h1>
+        <div class="scores">
+            <h3>Score: <span id="score">0</span></h3>
+        </div>
 
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
-    <button id="reset">Reset</button>
+        <div id="player-choice">
+            <h3>Your Choice: <span></span></h3>
+        </div>
+        
+        <div id="computer-choice">
+            <h3>Computer's Choice: <span></span></h3>
+        </div>
 
-    <script src="app.js" charset="utf-8"></script>
+        <div class="choices">
+            <button onclick="play('rock')">Rock</button>
+            <button onclick="play('paper')">Paper</button>
+            <button onclick="play('scissors')">Scissors</button>
+        </div>
+
+        <div class="result">
+            <h2>Result: <span></span></h2>
+        </div>
+
+        <button id="reset" onclick="resetGame()">Reset Game</button>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>
