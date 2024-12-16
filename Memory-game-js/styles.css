@@ -1,6 +1,71 @@
-.grid {
-    display: flex;
-    flex-wrap: wrap;
-    width: 400px;
-    height: 300px;
-  }
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 15px 0;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+/* Difficulty Selector Styles */
+#difficulty-selector-container {
+  margin-top: 20px;
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #333;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* Grid Styles */
+#grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 100px);
+  gap: 15px;
+  justify-content: center;
+  padding: 20px;
+}
+
+#grid-container img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#grid-container img:hover {
+  transform: scale(1.1);
+}
+
+/* Timer and Result Styles */
+#timer, #result {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+#timer {
+  color: red;
+}
+
+/* Footer Styles */
+footer {
+  margin-top: 20px;
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  font-size: 14px;
+}
